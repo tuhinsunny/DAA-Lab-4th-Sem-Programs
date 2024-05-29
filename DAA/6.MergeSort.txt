@@ -1,0 +1,71 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// Using Indexes
+
+void merge(int arr[], int start, int end) {
+    int mid = start + (end - start) / 2;
+    int i = start;
+    int j = mid + 1;
+    int k = start; // for new array indexing
+    int *a = (int *)malloc((end + 1) * sizeof(int)); // created new array to put sorted elements
+
+    while (i <= mid && j <= end) {
+        if (arr[i] < arr[j])
+            a[k++] = arr[i++];
+        else
+            a[k++] = arr[j++];
+    }
+
+    while (i <= mid) {
+        a[k++] = arr[i++];
+    }
+
+    while (j <= end) {
+        a[k++] = arr[j++];
+    }
+
+    // copying the new array array into the old array
+    for (int i = start; i <= end; i++) {
+        arr[i] = a[i];
+    }
+
+    // releasing the heap memory
+    free(a);
+}
+
+void mergeSort(int arr[], int s, int e) {
+    int mid = s + (e - s) / 2;
+    if (s >= e)
+        return;
+    // sort the first part of the array
+    mergeSort(arr, s, mid);
+    // sort the second part of the array
+    mergeSort(arr, mid + 1, e);
+    // merge
+    merge(arr, s, e);
+}
+
+int main() {
+    int n;
+    printf("Enter the size of the array: ");
+    scanf("%d", &n);
+
+    printf("Enter the elements of the array:\n");
+    int *arr = (int *)malloc(n * sizeof(int));
+
+    for (int i = 0; i < n; i++)
+        scanf("%d", &arr[i]);
+
+    mergeSort(arr, 0, n - 1);
+
+    printf("Sorted array:\n");
+    for (int i = 0; i < n; i++)
+        printf("%d ", arr[i]);
+    printf("\n");
+
+    // releasing the heap memory
+    free(arr);
+
+    return 0;
+}

@@ -1,0 +1,45 @@
+#include <stdio.h>
+
+int linearSearch(int a[], int n, int val) {
+    // Going through array sequentially
+    for (int i = 0; i < n; i++) {
+        if (a[i] == val)
+            return i+1;
+    }
+    return -1;
+}
+
+int main() {
+    int n, val;
+
+    // Taking the size of the array as input
+    printf("Enter the number of elements in the array: ");
+    scanf("%d", &n);
+
+    int a[n];
+
+    // Taking the elements of the array as input
+    printf("Enter the elements of the array:\n");
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &a[i]);
+    }
+
+    // Taking the value to be searched as input
+    printf("Enter the value to be searched: ");
+    scanf("%d", &val);
+
+    int res = linearSearch(a, n, val); // Store result
+
+    printf("The elements of the array are - ");
+    for (int i = 0; i < n; i++)
+        printf("%d ", a[i]);
+    
+    printf("\nElement to be searched is - %d", val);
+    
+    if (res == -1)
+        printf("\nElement is not present in the array");
+    else
+        printf("\nElement is present at %d position of array", res);
+    
+    return 0;
+}

@@ -1,0 +1,48 @@
+#include <stdio.h>
+
+// Function to perform selection sort
+void selection(int arr[], int n) {  
+    int i, j, small;  
+      
+    for (i = 0; i < n-1; i++) {  // One by one move boundary of unsorted subarray  
+        small = i;  // minimum element in unsorted array
+          
+        for (j = i+1; j < n; j++) {
+            if (arr[j] < arr[small]) {
+                small = j;  
+            }
+        }
+        // Swap the found minimum element with the first element
+        int temp = arr[small];  
+        arr[small] = arr[i];  
+        arr[i] = temp;  
+    }  
+}
+
+int main() {
+    int n;
+
+    // Taking the size of the array as input
+    printf("Enter the number of elements in the array: ");
+    scanf("%d", &n);
+
+    int arr[n];
+
+    // Taking the elements of the array as input
+    printf("Enter the elements of the array:\n");
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &arr[i]);
+    }
+
+    // Sorting the array using selection sort
+    selection(arr, n);
+
+    // Printing the sorted array
+    printf("Sorted array: ");
+    for (int i = 0; i < n; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+
+    return 0;
+}
